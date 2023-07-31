@@ -1,0 +1,41 @@
+version: '3.9'
+
+services:
+
+    app:
+        build:
+            context: .
+            dockerfile: docker/php/Dockerfile
+        restart: "unless-stopped"
+        environment:
+            TIMEZONE: Europe/Prague
+
+    www:
+        image: nginx:1.25.1
+        restart: "unless-stopped"
+        volumes:
+            - ./:/var/www/html
+            - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+        depends_on:
+            - app
+
+    # MySQL service
+    db:
+        container_name: svj_db
+        image: mariadb:11.0.2
+        restart: "unless-stopped"
+        environment:
+            MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD:-root}
+            MARIADB_DATABASE: ${MARIADB_DATABASE:-web}
+            MARIADB_USER: ${MARIADB_USER:-user}
+            MARIADB_PASSWORD: ${MARIADB_PASSWORD:-user}
+            MARIADB_ROOT_HOST: ${MARIADB_ROOT_HOST:-%}
+        volumes:
+            - ./docker/mariadb/my.cnf:/etc/mysql/conf.d/my.cnf
+            - volume_db:/var/lib/mysql
+
+
+volumes:
+    volume_db:
+        external: true
+        name: "svj_db"

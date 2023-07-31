@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+
+    # PHP App Service
+    app:
+        container_name: svj_php
+        build:
+            args:
+                GROUP_ID: ${GROUP_ID:-1000}
+                USER_ID: ${USER_ID:-1000}
+            target: app_development
+        volumes:
+            - ./:/var/www/html
+
+    # Nginx Service
+    www:
+        container_name: svj_www
+        ports:
+            - "80:80"
+
+    db:
+        container_name: svj_db
+
+    adminer:
+        container_name: svj_adminer
+        image: adminer:4.8.1
+        restart: unless-stopped
+        ports:
+            - "8080:8080"

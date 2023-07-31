@@ -71,6 +71,7 @@
     },
     "require-dev": {
         "orisai/coding-standard": "^3.8",
+        "phpstan/phpstan": "^1.10",
         "symfony/stopwatch": "6.3.*",
         "symfony/web-profiler-bundle": "6.3.*"
     }

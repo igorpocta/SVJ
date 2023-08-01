@@ -70,6 +70,7 @@
         }
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
         "orisai/coding-standard": "^3.8",
         "phpstan/phpstan": "^1.10",
         "symfony/stopwatch": "6.3.*",

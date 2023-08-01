@@ -11,6 +11,8 @@
 	<!-- Import coding-standard -->
 	<rule ref="./vendor/orisai/coding-standard/src/ruleset-8.1.xml"/>
 
+	<exclude-pattern>src/Database/Migrations</exclude-pattern>
+
 	<!-- Configure PSR-4 rule -->
 	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
 		<properties>
